@@ -1,0 +1,22 @@
+spring:
+  security:
+    oauth2:
+      client:
+        provider:
+          keycloak:
+            issuer-uri: http://localhost:8002/realms/Home
+            user-name-attribute: preferred_username
+      resourceserver:
+        jwt:
+          issuer-uri: http://localhost:8002/  realms/Home
+          jwk-set-uri: http://localhost:8002/realms/Home/protocol/openid-connect/certs
+  jpa:
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+  h2:
+    console:
+      enabled: true
+server:
+  servlet:
+    context-path: /api
