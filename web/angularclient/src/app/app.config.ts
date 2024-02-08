@@ -17,7 +17,9 @@ function initializeOAuth(oauthService: OAuthService): Promise<void>{
   return new Promise((resolve)=>{
     oauthService.configure(authFlowCodeConfig);
     oauthService.setupAutomaticSilentRefresh();
+    console.log('preresolve');
     oauthService.loadDiscoveryDocumentAndLogin().then(()=>{
+      console.log('resolved');
       resolve();
     })
   });
@@ -28,9 +30,7 @@ export const appConfig: ApplicationConfig = {
   {
     provide:  APP_INITIALIZER,
     useFactory: (oauthService: OAuthService) => {
-      return () => {
-        initializeOAuth(oauthService);
-      }
+      return () : Promise<any> => initializeOAuth(oauthService);
     },
     multi: true,
     deps:[

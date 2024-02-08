@@ -11,7 +11,7 @@ import { CatService } from '../../services/cat.service';
 export class HomeComponent {
 
   constructor(private catService: CatService){}
-  afterAuthInitialized(){
+  ngOnInit(){
     this.catService.getCats().subscribe(cats=>{
       console.log(cats);
     });

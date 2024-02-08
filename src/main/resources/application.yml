@@ -8,7 +8,7 @@ spring:
             user-name-attribute: preferred_username
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8002/  realms/Home
+          issuer-uri: http://localhost:8002/realms/Home
           jwk-set-uri: http://localhost:8002/realms/Home/protocol/openid-connect/certs
   jpa:
     properties:

@@ -15,6 +15,7 @@ export class CatService {
   }
 
   public getCats() : Observable<Cat[]>{
+    console.log('attempting');
     return this.http.get<Cat[]>(this.url, {
       headers:
       {

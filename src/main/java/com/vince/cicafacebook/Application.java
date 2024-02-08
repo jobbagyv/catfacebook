@@ -16,6 +16,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.vince.cicafacebook.entities.User;
 
+import java.util.Random;
 import java.util.stream.Stream;
 
 @SpringBootApplication
@@ -59,7 +60,8 @@ public class Application {
                         .user(user)
                         .build();
                 catRepository.save(cat);
-                ratingRepository.save(Rating.builder().user(user).cat(cat).value(5).comment("Best cat").build());
+                for(int i = 0; i < new Random().nextInt(2, 6); i++)
+                    ratingRepository.save(Rating.builder().user(user).cat(cat).value(new Random().nextInt(3, 6)).comment("Best cat").build());
             });
             userRepository.findAll().forEach(System.out::println);
             userRepository.findAllEager().forEach(user -> System.out.println(user.getCats()));
