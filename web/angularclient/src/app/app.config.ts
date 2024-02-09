@@ -1,8 +1,9 @@
 import { APP_INITIALIZER, ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AuthConfig, OAuthService, provideOAuthClient } from 'angular-oauth2-oidc';
+import { authHeaderInterceptor } from '../interceptors/auth-header.interceptor';
 
 export const authFlowCodeConfig : AuthConfig = {
   issuer: 'http://localhost:8002/realms/Home',
@@ -17,16 +18,14 @@ function initializeOAuth(oauthService: OAuthService): Promise<void>{
   return new Promise((resolve)=>{
     oauthService.configure(authFlowCodeConfig);
     oauthService.setupAutomaticSilentRefresh();
-    console.log('preresolve');
     oauthService.loadDiscoveryDocumentAndLogin().then(()=>{
-      console.log('resolved');
       resolve();
     })
   });
 }
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideHttpClient(), provideOAuthClient(),
+  providers: [provideRouter(routes), provideHttpClient(withInterceptors([authHeaderInterceptor])), provideOAuthClient(),
   {
     provide:  APP_INITIALIZER,
     useFactory: (oauthService: OAuthService) => {

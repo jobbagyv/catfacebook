@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Cat } from '../models/cat';
-import { OAuthService } from 'angular-oauth2-oidc';
 
 @Injectable({
   providedIn: 'root'
@@ -10,17 +9,11 @@ import { OAuthService } from 'angular-oauth2-oidc';
 export class CatService {
 
   private url : string;
-  constructor(private http: HttpClient, private oauthService: OAuthService) { 
+  constructor(private http: HttpClient) { 
     this.url = 'http://localhost:8080/api/cats';
   }
 
   public getCats() : Observable<Cat[]>{
-    console.log('attempting');
-    return this.http.get<Cat[]>(this.url, {
-      headers:
-      {
-        'Authorization': this.oauthService.authorizationHeader()
-      }
-      });
+    return this.http.get<Cat[]>(this.url);
   }
 }
