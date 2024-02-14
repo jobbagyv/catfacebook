@@ -4,6 +4,7 @@ import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { AuthConfig, OAuthService, provideOAuthClient } from 'angular-oauth2-oidc';
 import { authHeaderInterceptor } from '../interceptors/auth-header.interceptor';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 
 export const authFlowCodeConfig : AuthConfig = {
   issuer: 'http://localhost:8002/realms/Home',
@@ -35,7 +36,7 @@ export const appConfig: ApplicationConfig = {
     deps:[
       OAuthService
     ]
-  }]
+  }, provideAnimationsAsync()]
 };
 
 export interface TestInterface{

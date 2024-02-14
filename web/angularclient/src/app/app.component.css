@@ -1,0 +1,35 @@
+.container{
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto 1fr;
+    gap: 12px;
+    grid-template-areas: 
+    "header"
+    "content";
+    height: 100vh
+}
+
+  .app-header {
+    position: sticky;
+    top: 0;
+    font-size: 14px;
+    grid-area: header;
+  }
+
+  app-nav {
+    grid-area: nav;
+    margin-left: 0.6rem;
+  }
+
+  app-footer {
+    text-align: center;
+    padding: 25px 0;
+  }
+
+  .main {
+    grid-area: content;
+    padding: 25px;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+  }
